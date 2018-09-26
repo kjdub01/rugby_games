@@ -16,9 +16,9 @@ class RugbyGames::CLI
   end
   
   def menu
-    puts "Enter a number to get more information about a match or type list to list games or type exit to end"
     input = nil
     while input != "exit"
+    puts "Enter the list number to get more information about a match or type list to list games or type exit to end"
       input = gets.strip.downcase
       case input
       when "1"
@@ -27,6 +27,8 @@ class RugbyGames::CLI
         puts "Match 2 info..."
       when "list"
         list_games
+      else
+        puts "Invalid entry."
       end
     end
   end 
