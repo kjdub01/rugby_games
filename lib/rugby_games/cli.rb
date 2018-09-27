@@ -8,11 +8,9 @@ class RugbyGames::CLI
   
   def list_games
     puts "Today's rugby games"
-    puts <<-DOC.gsub /^\s*/, ''
+  
+  @games = RugbyGames::Matches.today
     
-      1. Hawkes Bay vs Northland at McLean Park, Napier
-      2. New Zealand vs Argentina at Welington
-    DOC
   end
   
   def menu
