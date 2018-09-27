@@ -8,8 +8,9 @@ class RugbyGames::CLI
   
   def list_games
     puts "Today's rugby games"
-  
   @games = RugbyGames::Matches.today
+  @games.each.with_index(1) do |game, i|
+    puts "#{i}. #{game.league} -- #{game.name} -- #{game.location}"
     
   end
   
@@ -18,12 +19,11 @@ class RugbyGames::CLI
     while input != "exit"
     puts "Enter the list number to get more information about a match or type list to list games or type exit to end"
       input = gets.strip.downcase
-      case input
-      when "1"
-        puts "Match 1 info..."
-      when "2"
-        puts "Match 2 info..."
-      when "list"
+      
+      if input.to_i > 0 
+        the_game = @games[input.to_i - 1]
+        puts "#{the_game.league} -- #{the_game.name} -- #{the_game.location}"
+      elsif "list"
         list_games
       else
         puts "Invalid entry."
