@@ -12,7 +12,8 @@
   end
   
   def self.scrape_espn
-    site = Nokogiri::HTML(open("http://www.espn.com/rugby/fixtures"))
+    doc = Nokogiri::HTML(open("http://www.espn.com/rugby/scoreboard?date=20180929"))
+    teams = doc.search('span.short-name').map(&:text).delete_if{|x| x !~ /\w/}
     binding.pry
   end
 end
