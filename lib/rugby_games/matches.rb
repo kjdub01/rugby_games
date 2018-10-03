@@ -19,4 +19,11 @@
     fullgames = doc.search('a.competitors').map(&:text).delete_if{|x| x !~ /\w/}
     binding.pry
   end
+  
+  def self.scrape_bbc
+    doc = Nokogiri::HTML(open("https://www.bbc.com/sport/rugby-union/international-match/fixtures"))
+    games = doc.search('aritcle.fixture').map(&:text)
+    dates = doc.search('h4.gel-minion').map(&:text)
+    binding.pry
+  end
 end
