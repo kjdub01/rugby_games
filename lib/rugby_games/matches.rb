@@ -16,7 +16,7 @@
     teams = doc.search('span.short-name').map(&:text).delete_if{|x| x !~ /\w/}
     times = doc.search('span.game-time').map(&:text).delete_if{|x| x !~ /\w/}
     leagues = doc.search('h2.date-heading').map(&:text).delete_if{|x| x !~ /\w/}
-    urls = doc.search('').('href')
+    urls = doc.search('a.button-alt').attr('href')
     
     a_teams = teams.values_at(*teams.each_index.select(&:even?))
     b_teams = teams.values_at(*teams.each_index.select(&:odd?))
