@@ -8,10 +8,11 @@ class RugbyGames::CLI
   
   def list_games
     puts "Today's rugby games"
-  @games = RugbyGames::Matches.today
+  @games = RugbyGames::Games.today
     @games.each.with_index(1) do |game, i|
-      puts "#{i}. #{game.league} -- #{game.name} -- #{game.location}"
+      puts "#{i}. #{game.time} -- #{game.first_team} vs #{game.second_team}"
     end
+    binding.pry
   end
   
   def menu
