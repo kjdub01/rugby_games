@@ -1,18 +1,18 @@
 class RugbyGames::CLI 
   
-  def call 
+  def call
+    RugbyGames::Games.scrape_espn
     list_games
     menu
     goodbye
   end 
   
   def list_games
-    puts "Today's rugby games"
+    puts "Today's Rugby Games"
   @games = RugbyGames::Games.today
     @games.each.with_index(1) do |game, i|
       puts "#{i}. #{game.time} -- #{game.first_team} vs #{game.second_team}"
     end
-    binding.pry
   end
   
   def menu
