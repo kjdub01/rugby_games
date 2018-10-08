@@ -31,7 +31,6 @@
       game.second_team = b_team_name
       game.time = time
       game.save
-      binding.pry
     end
   end
   
