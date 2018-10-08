@@ -4,7 +4,7 @@
   @@all = []
   
   def self.today
-    @@all
+    @@all.reverse.drop(1).reverse
   end
   
   def save 
@@ -12,7 +12,7 @@
   end
   
   def self.scrape_espn
-    doc = Nokogiri::HTML(open("http://www.espn.com/rugby/scoreboard?date=20181005"))
+    doc = Nokogiri::HTML(open("http://www.espn.com/rugby/scoreboard?date=20181013"))
     teams = doc.search('span.short-name').map(&:text).delete_if{|x| x !~ /\w/}
     times = doc.search('span.game-time').map(&:text).delete_if{|x| x !~ /\w/}
     leagues = doc.search('h2.date-heading').map(&:text).delete_if{|x| x !~ /\w/}
@@ -32,6 +32,7 @@
       game.time = time
       game.save
     end
+    #binding.pry 
   end
   
 end
