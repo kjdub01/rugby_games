@@ -1,4 +1,4 @@
-  class Games
+  class RugbyGames::Games
   attr_accessor :first_team, :second_team, :time, :league, :url
   
   @@all = []
@@ -36,7 +36,7 @@
       game.save
     end
     
-    binding.pry
+    
   end
   
   
