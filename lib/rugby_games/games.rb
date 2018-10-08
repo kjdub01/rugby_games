@@ -1,4 +1,4 @@
-  class RugbyGames::Games
+  class Games
   attr_accessor :first_team, :second_team, :time, :league, :url
   
   @@all = []
@@ -11,8 +11,15 @@
     @@all << self
   end
   
-  def self.build_games
-    RugbyGames::Scrape.scrape_espn
+  def self.scrape_espn
+    doc = Nokogiri::HTML(open("http://www.espn.com/rugby/scoreboard?date=20181005"))
+    teams = doc.search('span.short-name').map(&:text).delete_if{|x| x !~ /\w/}
+    times = doc.search('span.game-time').map(&:text).delete_if{|x| x !~ /\w/}
+    leagues = doc.search('h2.date-heading').map(&:text).delete_if{|x| x !~ /\w/}
+    urls = doc.search('a.button-alt').attr('href')
+    
+    a_teams = teams.values_at(*teams.each_index.select(&:even?))
+    b_teams = teams.values_at(*teams.each_index.select(&:odd?))
    
     (0..a_teams.size).to_a.each do |i|
       a_team_name = a_teams[i]
@@ -24,7 +31,8 @@
       game.second_team = b_team_name
       game.time = time
       game.save
+      binding.pry
     end
   end
-  binding.pry
+  
 end
