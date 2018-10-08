@@ -1,5 +1,5 @@
   class Games
-  attr_accessor :first_team, :second_team, :time, :league, :url
+  attr_accessor :first_team, :second_team, :time, :league, :first_score, :second_score
   
   @@all = []
   
@@ -12,27 +12,34 @@
   end
   
   def self.scrape_espn
-    doc = Nokogiri::HTML(open("http://www.espn.com/rugby/scoreboard?date=20181013"))
+    doc = Nokogiri::HTML(open("http://www.espn.com/rugby/scoreboard?date=20181006"))
     teams = doc.search('span.short-name').map(&:text).delete_if{|x| x !~ /\w/}
     times = doc.search('span.game-time').map(&:text).delete_if{|x| x !~ /\w/}
     leagues = doc.search('h2.date-heading').map(&:text).delete_if{|x| x !~ /\w/}
     urls = doc.search('a.button-alt').attr('href')
+    scores = doc.search('div.score-container').map(&:text)
     
     a_teams = teams.values_at(*teams.each_index.select(&:even?))
     b_teams = teams.values_at(*teams.each_index.select(&:odd?))
+    a_teams_scores = scores.values_at(*teams.each_index.select(&:even?))
+    b_teams_scores = scores.values_at(*teams.each_index.select(&:odd?))
    
     (0..a_teams.size).to_a.each do |i|
       a_team_name = a_teams[i]
       b_team_name = b_teams[i]
       time = times[i]
+      a_team_score = a_teams_scores[i]
+      b_teams_score = b_teams_scores[i]
       
       game = Games.new 
       game.first_team = a_team_name
       game.second_team = b_team_name
       game.time = time
+      game.first_score = a_team_score
+      game.second_score = b_teams_score
       game.save
     end
-    #binding.pry 
+    binding.pry 
   end
   
 end
