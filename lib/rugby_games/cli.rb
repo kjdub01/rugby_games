@@ -1,7 +1,7 @@
 class RugbyGames::CLI 
   
   def call
-    RugbyGames::Games.scrape_espn
+    Games.scrape_espn
     list_games
     menu
     goodbye
@@ -9,7 +9,7 @@ class RugbyGames::CLI
   
   def list_games
     puts "Today's Rugby Games"
-  @games = RugbyGames::Games.today
+  @games = Games.today
     @games.each.with_index(1) do |game, i|
       puts "#{i}. #{game.time} -- #{game.first_team} vs #{game.second_team}"
     end
@@ -23,7 +23,8 @@ class RugbyGames::CLI
       
       if input.to_i > 0 
         the_game = @games[input.to_i - 1]
-        puts "#{the_game.league} -- #{the_game.name} -- #{the_game.location}"
+        puts "#{the_game.time} -- #{the_game.first_team} vs #{the_game.second_team}"
+        puts 
       elsif "list"
         list_games
       else
