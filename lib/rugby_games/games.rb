@@ -39,7 +39,7 @@
       game.second_score = b_teams_score
       game.save
     end
-    binding.pry 
+    #binding.pry 
   end
   
 end
