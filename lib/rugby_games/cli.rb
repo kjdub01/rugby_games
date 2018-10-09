@@ -2,14 +2,21 @@ class RugbyGames::CLI
   
   def call
     Games.scrape_espn
-    list_games
-    menu
-    goodbye
+    @games = Games.today
+    if @games == []
+      puts "Sorry, there are not games today."
+      goodbye
+      
+    else
+      list_games
+      menu
+      goodbye
+    end
   end 
   
   def list_games
     puts "Today's Rugby Games"
-  @games = Games.today
+    
     @games.each.with_index(1) do |game, i|
       puts "#{i}. #{game.time} -- #{game.first_team} vs #{game.second_team}"
     end
