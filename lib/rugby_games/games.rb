@@ -1,4 +1,4 @@
-  class Games
+class Games
   attr_accessor :first_team, :second_team, :time, :league, :first_score, :second_score
   
   @@all = []
@@ -12,7 +12,7 @@
   end
   
   def self.scrape_espn
-    doc = Nokogiri::HTML(open("http://www.espn.com/rugby/scoreboard?date=20181006"))
+    doc = Nokogiri::HTML(open("http://www.espn.com/rugby/scoreboard"))
     teams = doc.search('span.short-name').map(&:text).delete_if{|x| x !~ /\w/}
     times = doc.search('span.game-time').map(&:text).delete_if{|x| x !~ /\w/}
     leagues = doc.search('h2.date-heading').map(&:text).delete_if{|x| x !~ /\w/}
