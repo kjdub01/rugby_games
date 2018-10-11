@@ -1,5 +1,5 @@
 class Games
-  attr_accessor :first_team, :second_team, :time, :league, :first_score, :second_score
+  attr_accessor :first_team, :second_team, :time, :first_score, :second_score
   
   @@all = []
   
@@ -15,10 +15,8 @@ class Games
     doc = Nokogiri::HTML(open("http://www.espn.com/rugby/scoreboard"))
     teams = doc.search('span.short-name').map(&:text).delete_if{|x| x !~ /\w/}
     times = doc.search('span.game-time').map(&:text).delete_if{|x| x !~ /\w/}
-    leagues = doc.search('h2.date-heading').map(&:text).delete_if{|x| x !~ /\w/}
-    urls = doc.search('a.button-alt').attr('href')
     scores = doc.search('div.score-container').map(&:text)
-    
+  
     a_teams = teams.values_at(*teams.each_index.select(&:even?))
     b_teams = teams.values_at(*teams.each_index.select(&:odd?))
     a_teams_scores = scores.values_at(*teams.each_index.select(&:even?))
@@ -39,7 +37,5 @@ class Games
       game.second_score = b_teams_score
       game.save
     end
-    #binding.pry 
   end
-  
 end
