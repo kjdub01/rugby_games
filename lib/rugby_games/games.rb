@@ -12,7 +12,7 @@ class Games
   end
   
   def self.scrape_espn
-    doc = Nokogiri::HTML(open("http://www.espn.com/rugby/scoreboard?"))
+    doc = Nokogiri::HTML(open("http://www.espn.com/rugby/scoreboard?date=20181019"))
     teams = doc.search('span.short-name').map(&:text).delete_if{|x| x !~ /\w/}
     times = doc.search('span.game-time').map(&:text).delete_if{|x| x !~ /\w/}
     scores = doc.search('div.score-container').map(&:text)
