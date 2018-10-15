@@ -4,7 +4,7 @@ class RugbyGames::CLI
     Games.scrape_espn
     @games = Games.today
     if @games == []
-      puts "Sorry, there are not games today."
+      puts "Sorry, there are no games today."
       goodbye
       
     else
