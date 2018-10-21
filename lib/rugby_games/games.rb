@@ -14,8 +14,15 @@ class Games
   def self.scrape_espn
     doc = Nokogiri::HTML(open("http://www.espn.com/rugby/scoreboard?"))
     teams = doc.search('span.short-name').map(&:text).delete_if{|x| x !~ /\w/}
-    times = doc.search('span.game-time').map(&:text).delete_if{|x| x !~ /\w/}
+    times = doc.search('span.game-time').map(&:text)
     scores = doc.search('div.score-container').map(&:text)
+    
+    
+    games = doc.search("div#events")
+    games.each do |game|
+      league_name = game.css("div a h2.date-heading.js-show").text 
+      binding.pry
+    end
   
     a_teams = teams.values_at(*teams.each_index.select(&:even?))
     b_teams = teams.values_at(*teams.each_index.select(&:odd?))
