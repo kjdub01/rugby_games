@@ -1,5 +1,5 @@
 class Games
-  attr_accessor :home_team, :away_team, :time, :home_score, :away_score, :url
+  attr_accessor :home_team, :away_team, :time, :home_score, :away_score, :url, :league_name
   
   @@all = []
   
@@ -26,8 +26,9 @@ class Games
     end
   
     doc.search("div#events").each do |league|
-      game.league_name = league.css("div a h2.date-heading.js-show").text 
-      game.save
+      #league = League.new
+      league.name = league.css("div a h2.date-heading.js-show").text 
+      league.save
     end
   
    binding.pry
