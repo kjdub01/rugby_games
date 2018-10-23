@@ -1,12 +1,12 @@
 class RugbyGames::CLI 
   
   def call
-    Scraper.scrape_games
+    Scraper.scrape_espn
     @games = Games.today
     if @games == []
       puts "Sorry, there are no games today."
       goodbye
-      
+  
     else
       list_games
       menu

@@ -1,6 +1,6 @@
 class Scraper
   
-  def self.scrape_games
+  def self.scrape_espn
     @doc = Nokogiri::HTML(open("http://www.espn.com/rugby/scoreboard?date=20181027"))
    
     @doc.search("a.competitors").each do |contest|
@@ -13,13 +13,11 @@ class Scraper
       game.away_score = contest.css("div.team.team-b.possession div.score.icon-font-before").text
       game.save
     end
+    
+    @doc.search("h2.date-heading.js-show").each do |division|
+     league = Leagues.new
+     league.name = division.text 
+     league.save
+    end
   end
-  
-  #def scrape_leagues
-   # @doc.search("div#events").each do |league|
-     # league = League.new
-     # league.name = league.css("div a h2.date-heading.js-show").text 
-     # league.save
-    #end
-  #end
 end
