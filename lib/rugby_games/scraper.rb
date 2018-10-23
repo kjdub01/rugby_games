@@ -1,10 +1,10 @@
-class Scraper
+class RugbyGames::Scraper
   
   def self.scrape_espn
-    @doc = Nokogiri::HTML(open("http://www.espn.com/rugby/scoreboard?date=20181020"))
+    @doc = Nokogiri::HTML(open("http://www.espn.com/rugby/scoreboard?"))
    
     @doc.search("a.competitors").each do |contest|
-      game = Games.new
+      game = RugbyGames::Games.new
       #game.url = contest.attr("href")
       game.time = contest.css("span.game-time").text
       game.home_team = contest.css("div.team.team-a.possession span.short-name").text
