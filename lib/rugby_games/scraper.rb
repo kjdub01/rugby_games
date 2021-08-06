@@ -1,9 +1,13 @@
 class RugbyGames::Scraper
   BASE_URL = "http://www.espn.com"
   def self.scrape_espn
-    @doc = Nokogiri::HTML(URI.open("http://www.espn.com/rugby/scoreboard?date=20210605"))
+    @doc = Nokogiri::HTML(URI.open("http://www.espn.com/rugby/scoreboard?"))
    
     @doc.css("a.competitors").each do |contest|
+      date = RugbyGames::Dates.new
+      date.text = contest.css("span.game-date").text
+      date.save
+
       game = RugbyGames::Games.new
       #game.url = BASE_URL + contest.attr("href")
       game.time = contest.css("span.game-time").text
