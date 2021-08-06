@@ -22,7 +22,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  bundler (~> 1.16)
+  bundler (~> 2.2.24)
   nokogiri
   pry
   rake (~> 13.0)
