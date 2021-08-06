@@ -4,5 +4,6 @@ require "open-uri"
 require_relative "./rugby_games/version"
 require_relative "./rugby_games/scraper"
 require_relative "./rugby_games/games"
+require_relative "./rugby_games/dates"
 require_relative "./rugby_games/cli"
 
