@@ -4,7 +4,7 @@ class RugbyGames::CLI
     RugbyGames::Scraper.scrape_espn
     RugbyGames::Games.today
     if RugbyGames::Games.today == []
-      puts "Sorry, there are no games today."
+      puts "Sorry, there are no games."
       goodbye
   
     else
@@ -14,7 +14,10 @@ class RugbyGames::CLI
   end 
   
   def list_games
-    puts "Today's Rugby Games"
+    date = RugbyGames::Dates.game_day.first
+    year = Time.now.year
+    puts "Rugby Games #{date.text}/#{year}"
+
     RugbyGames::Games.today.each.with_index(1) do |game, i|
       puts "#{i}. #{game.time} -- #{game.home_team} vs #{game.away_team}"
     end
