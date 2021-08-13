@@ -14,9 +14,8 @@ class RugbyGames::CLI
   end 
   
   def list_games
-    date = RugbyGames::Dates.game_day.first
-    year = Time.now.year
-    puts "Rugby Games #{date.text}/#{year}"
+    date = RugbyGames::Dates.game_day
+    puts "#{date.last.text}"
 
     RugbyGames::Games.today.each.with_index(1) do |game, i|
       puts "#{i}. #{game.time} -- #{game.home_team} vs #{game.away_team}"
@@ -30,8 +29,9 @@ class RugbyGames::CLI
       input = gets.strip.downcase
       
       if input.to_i > 0 && input.to_i <= RugbyGames::Games.today.size
-        the_game = RugbyGames::Games.today[input.to_i - 1]
-        puts "#{the_game.home_team}  #{the_game.home_score}  #{the_game.time}  #{the_game.away_score}  #{the_game.away_team}"
+        selected_game = RugbyGames::Games.today[input.to_i - 1] 
+        puts "#{selected_game.home_team}  #{selected_game.home_score}  #{selected_game.time}  #{selected_game.away_score}  #{selected_game.away_team}"
+        puts "#{selected_game.url}"
       elsif input == "list"
         list_games
       elsif input == "exit"
