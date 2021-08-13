@@ -16,8 +16,10 @@ class RugbyGames::Scraper
       game.time = contest.css("span.game-time").text
       game.home_team = contest.css("div.team.team-a.possession span.short-name").text
       game.home_score = contest.css("div.team.team-a.possession div.score.icon-font-after").text
+      game.home_record = contest.css("div.team.team-a.possession span.record").text
       game.away_team = contest.css("div.team.team-b.possession span.short-name").text
       game.away_score = contest.css("div.team.team-b.possession div.score.icon-font-before").text
+      game.away_record = contest.css("div.team.team-b.possession span.record").text
       game.save
     end
   end
