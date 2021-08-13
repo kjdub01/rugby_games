@@ -1,5 +1,5 @@
 class RugbyGames::Games
-  attr_accessor :home_team, :away_team, :time, :home_score, :away_score, :url
+  attr_accessor :home_team, :away_team, :time, :home_score, :away_score, :url, :home_record, :away_record
   
   @@all = []
   
