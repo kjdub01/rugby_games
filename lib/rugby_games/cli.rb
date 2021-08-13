@@ -14,8 +14,8 @@ class RugbyGames::CLI
   end 
   
   def list_games
-    date = RugbyGames::Dates.game_day
-    puts "#{date.last.text}"
+    date = RugbyGames::Dates.game_day.last
+    puts "#{date.text}"
 
     RugbyGames::Games.today.each.with_index(1) do |game, i|
       puts "#{i}. #{game.time} -- #{game.home_team} vs #{game.away_team}"
