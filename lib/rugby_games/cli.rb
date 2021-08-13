@@ -18,7 +18,7 @@ class RugbyGames::CLI
     puts "#{date.text}"
 
     RugbyGames::Games.today.each.with_index(1) do |game, i|
-      puts "#{i}. #{game.time} -- #{game.home_team} vs #{game.away_team}"
+      puts "#{i}. #{game.time} -- #{game.home_team} #{game.home_record} vs #{game.away_team} #{game.away_record}"
     end
   end
   
